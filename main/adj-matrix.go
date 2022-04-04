@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 type Graph struct {
 	node [][]int
@@ -33,7 +36,6 @@ func (this Graph) addEdge(u, v int) {
 }
 func (this Graph) adjacencyNode() {
 	if this.size > 0 {
-
 		for row := 0; row < this.size; row++ {
 			fmt.Print("", row, " : ")
 			for col := 0; col < this.size; col++ {
@@ -49,11 +51,26 @@ func (this Graph) adjacencyNode() {
 		fmt.Println("Empty Graph")
 	}
 }
+func adjacencyNodeText(texto string) {
+	if texto != "" {
+		var t string = strings.ReplaceAll(texto, " ", "") //remove espaços em branco
+		var t1 []string = strings.Split(t, "{")           //remove '{'
+		//var tfinal string = strings.ReplaceAll(string((t[1]), "}", "")//remove final
+		var g string = strings.Replace(t1[1], "}", "", 1)
+		fmt.Println(g)
+		var rows []string = strings.Split(g, "\n")
+		fmt.Println(rows[1])
+	} else {
+		fmt.Println("Empty Graph")
+	}
+}
 func main() {
-	var g *Graph = getGraph(10) //Defina o tamanho de Vértices
+
+	var g *Graph = getGraph(5) //Defina o tamanho de Vértices
 	//  adicinando arestas
 	g.addEdge(0, 1)
 	g.addEdge(2, 1)
-	// mostrando a matriz de adjancências
+	//mostrando a matriz de adjancências
 	g.adjacencyNode()
+
 }
